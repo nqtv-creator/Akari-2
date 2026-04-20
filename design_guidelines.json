@@ -1,0 +1,87 @@
+{
+  "theme": "Light",
+  "archetype": "6 (Vibrant Play)",
+  "typography": {
+    "heading_font": "Fredoka",
+    "body_font": "Nunito",
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl tracking-tight font-bold text-slate-800",
+      "h2": "text-2xl sm:text-3xl tracking-tight font-bold text-slate-800",
+      "h3": "text-xl font-semibold text-slate-700",
+      "body": "text-base font-medium text-slate-600",
+      "button": "text-lg font-bold uppercase tracking-wide"
+    }
+  },
+  "colors": {
+    "background": {
+      "main": "#F8FAFC",
+      "card": "#FFFFFF",
+      "map_path": "#E2E8F0"
+    },
+    "brand": {
+      "primary": "#1CB0F6",
+      "primary_shadow": "#1899D6",
+      "secondary": "#FFC800",
+      "secondary_shadow": "#E5B400"
+    },
+    "status": {
+      "success": "#58CC02",
+      "success_shadow": "#4BAA00",
+      "error": "#FF4B4B",
+      "error_shadow": "#EA3232",
+      "locked": "#E5E7EB",
+      "locked_shadow": "#D1D5DB"
+    },
+    "text": {
+      "primary": "#1E293B",
+      "secondary": "#64748B",
+      "inverse": "#FFFFFF"
+    },
+    "grid": {
+      "cell_wall": "#334155",
+      "cell_empty": "#FFFFFF",
+      "cell_lit": "#FFF4B2",
+      "cell_error": "#FCA5A5",
+      "grid_lines": "#CBD5E1"
+    }
+  },
+  "spacing_and_layout": {
+    "global": "Generous spacing. Use container mx-auto max-w-lg for mobile-first puzzle feel. p-4 or p-6 for most cards.",
+    "buttons": "Neo-brutalist tactile. All primary buttons must have `rounded-2xl border-2 border-slate-800 shadow-[0_4px_0_0_#1E293B]`. On `:active`, apply `translate-y-1 shadow-none`. Apply this to menu buttons, grid controls, and level nodes.",
+    "level_map": "Vertical scrolling list. Nodes represent levels. Alternate horizontal offsets (`translate-x-12`, `-translate-x-12`) to form a winding path. Connect nodes with a dashed SVG line in the background (z-[-1])."
+  },
+  "animations_and_interactions": {
+    "lamp_placed": "Framer Motion: scale burst from 0.8 to 1.2 to 1.0 with spring physics on the lamp icon. CSS: transition background color of lit cells from white to pale yellow.",
+    "level_win": "Confetti overlay (canvas-confetti) + Slide up modal showing stars with spring animation.",
+    "hover_states": "All interactable map nodes scale to 1.05 on hover.",
+    "audio": "Web Audio API. Lamp placed: short bright sine wave 'pop' (600Hz to 800Hz). Level win: cheerful arpeggio (C4, E4, G4, C5). Error: low sawtooth 'buzz'."
+  },
+  "components_strategy": {
+    "game_grid": "Use HTML5 Canvas for rendering the grid, lamps, and walls. The canvas should be wrapped in a responsive container with rounded-xl, thick border border-slate-800, and soft shadow.",
+    "lamp_counter": "Sticky or fixed pill at the top of the game screen showing current/max lamps (e.g., 💡 3 / 5). If max is reached, pulse the counter red.",
+    "tutorial_modal": "An interactive modal that appears before Level 1. Features the mascot image. Explains: 'Rules: Place lamps to light up white cells. No two lamps can shine on each other. Numbered walls dictate exactly how many lamps touch them.'",
+    "google_ads_placeholder": "A distinct rectangular block (e.g. 300x250) styled as `border-2 border-dashed border-slate-300 bg-slate-100 flex flex-col items-center justify-center rounded-xl overflow-hidden relative`. Contains 'Sponsorisé - Espace Publicitaire' badge."
+  },
+  "image_urls": [
+    {
+      "url": "https://images.unsplash.com/photo-1712725824834-5101660f6205?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwxfHxjdXRlJTIwY2FydG9vbiUyMGxpZ2h0YnVsYiUyMGlsbHVzdHJhdGlvbiUyMDNkfGVufDB8fHx8MTc3NjcyMDMxOHww&ixlib=rb-4.1.0&q=85",
+      "description": "Cute yellow 3D character, used as the tutorial mascot",
+      "category": "tutorial_character"
+    },
+    {
+      "url": "https://images.pexels.com/photos/16564263/pexels-photo-16564263.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Mock sponsor background for Google Ads placeholder",
+      "category": "ad_background"
+    }
+  ],
+  "instructions_to_main_agent": [
+    "Install and use 'framer-motion' for UI animations (bouncy buttons, winning modal).",
+    "Install and use 'lucide-react' for icons (lamps, back buttons, stars).",
+    "Install 'canvas-confetti' for the level win celebration.",
+    "Implement the Akari puzzle logic strictly in React state, but render it on an HTML5 `<canvas>` as requested. Ensure the canvas supports high DPI (scale by window.devicePixelRatio).",
+    "Use Web Audio API manually (no external lib needed) to generate synthesized sounds. Create a small utility file `audioUtils.js` for `playPopSound()`, `playWinSound()`, `playErrorSound()`.",
+    "The Home Screen should be a Level Map (Duolingo style) rather than a simple menu. Include a way to select modes (Classic, Color, Regional) and Difficulties via a top sticky header or tabs before showing the map.",
+    "The Lamp Counter should visibly decrement or show (used / max). e.g., '3 / 5 lamps used'. When max is exceeded, prevent placement or show a red error.",
+    "Enforce 'data-testid' on all game buttons, canvas clicks (if possible via wrapper), and map nodes for testing."
+  ]
+}
